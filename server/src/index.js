@@ -8,6 +8,8 @@ const env = require("./config/env");
 const corsMiddleware = require("./middleware/cors");
 const errorHandler = require("./middleware/errorHandler");
 const healthRoutes = require("./routes/health");
+const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/users");
 const { sendError } = require("./utils/responseHandler");
 
 const app = express();
@@ -18,6 +20,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.resolve(__dirname, env.uploadDir)));
 
 app.use("/api", healthRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 app.use((req, res) =>
   sendError(res, "Route not found.", "ERR_NOT_FOUND", 404),

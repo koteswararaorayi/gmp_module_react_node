@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
-function ProtectedRoute({ children, requiredRole }) {
+function ProtectedRoute({ children, requiredRole, requiredRoles }) {
   const location = useLocation();
   const { isAuthenticated, role } = useAuth();
 
@@ -9,7 +9,8 @@ function ProtectedRoute({ children, requiredRole }) {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
-  if (requiredRole && role !== requiredRole) {
+  const allowedRoles = requiredRoles || (requiredRole ? [requiredRole] : null);
+  if (allowedRoles && !allowedRoles.includes(role)) {
     return <Navigate to="/unauthorized" replace />;
   }
 

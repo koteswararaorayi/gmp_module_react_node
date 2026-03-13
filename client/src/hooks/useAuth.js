@@ -5,6 +5,7 @@ function useAuth() {
     isAuthenticated: state.isAuthenticated,
     userId: state.userId,
     token: state.token,
+    refreshToken: state.refreshToken,
     role: state.role,
     companyId: state.companyId,
     userName: state.userName,
@@ -15,6 +16,8 @@ function useAuth() {
     clearAuth: state.clearAuth,
     setLoading: state.setLoading,
     setError: state.setError,
+    setToken: state.setToken,
+    setRefreshToken: state.setRefreshToken,
   }));
 }
 

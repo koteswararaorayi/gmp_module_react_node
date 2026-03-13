@@ -1,7 +1,6 @@
-const jwt = require("jsonwebtoken");
-const env = require("../config/env");
 const { ERROR_CODES } = require("../config/constants");
 const { sendError } = require("../utils/responseHandler");
+const { verifyAccessToken } = require("../utils/jwtUtils");
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers.authorization || "";
@@ -17,7 +16,7 @@ function authenticateToken(req, res, next) {
   }
 
   try {
-    req.user = jwt.verify(token, env.jwt.secret);
+    req.user = verifyAccessToken(token);
     return next();
   } catch (error) {
     if (error.name === "TokenExpiredError") {
@@ -25,14 +24,14 @@ function authenticateToken(req, res, next) {
         res,
         "Authorization token has expired.",
         ERROR_CODES.ERR_TOKEN_EXPIRED,
-        403,
+        401,
       );
     }
 
     return sendError(
       res,
       "Authorization token is invalid.",
-      ERROR_CODES.ERR_UNAUTHORIZED,
+      ERROR_CODES.ERR_INVALID_TOKEN,
       401,
     );
   }
