@@ -42,6 +42,12 @@ function Header({ userName, role, onLogout }) {
           <NavLink to="/uom" className={navLinkClass}>
             UOM
           </NavLink>
+          <NavLink to="/warehouses" className={navLinkClass}>
+            Warehouses
+          </NavLink>
+          <NavLink to="/locations" className={navLinkClass}>
+            Locations
+          </NavLink>
           <NavLink to="/profile" className={navLinkClass}>
             Profile
           </NavLink>

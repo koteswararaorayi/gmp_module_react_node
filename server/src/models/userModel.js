@@ -175,6 +175,27 @@ async function getLoginHistoryByUserId(userId, limit, offset) {
   };
 }
 
+async function getManagersByCompany(companyId) {
+  const sql = `
+    SELECT
+      u.id,
+      u.username,
+      u.email,
+      r.role
+    FROM application_users u
+    LEFT JOIN roles r
+      ON r.id = u.role
+      AND (r.company_id = u.company_id OR r.company_id IS NULL)
+    WHERE u.company_id = ?
+      AND u.is_active = 0
+      AND (LOWER(COALESCE(r.role, '')) IN ('admin', 'manager'))
+    ORDER BY u.username ASC
+  `;
+
+  const [rows] = await pool.execute(sql, [companyId]);
+  return rows;
+}
+
 module.exports = {
   findUserByUsername,
   findUserByEmail,
@@ -186,4 +207,5 @@ module.exports = {
   updateUserPassword,
   getRoles,
   getLoginHistoryByUserId,
+  getManagersByCompany,
 };

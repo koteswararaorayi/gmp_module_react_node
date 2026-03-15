@@ -17,6 +17,9 @@ import ItemTypesList from "./pages/ItemTypes/ItemTypesList";
 import ManufacturersList from "./pages/Manufacturers/ManufacturersList";
 import SuppliersList from "./pages/Suppliers/SuppliersList";
 import UOMList from "./pages/UOM/UOMList";
+import WarehousesList from "./pages/Warehouses/WarehousesList";
+import WarehouseDetails from "./pages/Warehouses/WarehouseDetails";
+import LocationsList from "./pages/Locations/LocationsList";
 
 function LandingRedirect() {
   const { isAuthenticated } = useAuth();
@@ -125,6 +128,30 @@ function App() {
           element={
             <ProtectedRoute>
               <UOMList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/warehouses"
+          element={
+            <ProtectedRoute>
+              <WarehousesList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/warehouses/:id"
+          element={
+            <ProtectedRoute>
+              <WarehouseDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/locations"
+          element={
+            <ProtectedRoute>
+              <LocationsList />
             </ProtectedRoute>
           }
         />

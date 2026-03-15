@@ -252,10 +252,27 @@ async function getLoginHistory(req, res, next) {
   }
 }
 
+async function getManagers(req, res, next) {
+  try {
+    const managers = await userModel.getManagersByCompany(req.user.companyId);
+    const data = managers.map((u) => ({
+      id: u.id,
+      username: u.username,
+      email: u.email,
+      role: (u.role || "user").toLowerCase(),
+    }));
+
+    return sendSuccess(res, data, "Managers retrieved", 200);
+  } catch (error) {
+    return next(error);
+  }
+}
+
 module.exports = {
   getProfile,
   updateProfile,
   changePassword,
   getRoles,
   getLoginHistory,
+  getManagers,
 };

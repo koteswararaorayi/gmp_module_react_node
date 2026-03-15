@@ -23,5 +23,10 @@ router.get(
   authenticateToken,
   userController.getLoginHistory,
 );
+router.get(
+  "/managers",
+  authenticateToken,
+  userController.getManagers,
+);
 
 module.exports = router;
