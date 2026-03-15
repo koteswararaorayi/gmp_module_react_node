@@ -24,6 +24,24 @@ function Header({ userName, role, onLogout }) {
           <NavLink to="/dashboard" className={navLinkClass}>
             Dashboard
           </NavLink>
+          <NavLink to="/items" className={navLinkClass}>
+            Items
+          </NavLink>
+          <NavLink to="/categories" className={navLinkClass}>
+            Categories
+          </NavLink>
+          <NavLink to="/item-types" className={navLinkClass}>
+            Item Types
+          </NavLink>
+          <NavLink to="/manufacturers" className={navLinkClass}>
+            Manufacturers
+          </NavLink>
+          <NavLink to="/suppliers" className={navLinkClass}>
+            Suppliers
+          </NavLink>
+          <NavLink to="/uom" className={navLinkClass}>
+            UOM
+          </NavLink>
           <NavLink to="/profile" className={navLinkClass}>
             Profile
           </NavLink>
